@@ -5,6 +5,13 @@ describe("Tests that poker game", function() {
     expect(newState.numCards).toBe(5);
   });
 
+  it('can handle instances where there are too many players or cards for the size of the deck', function () {
+    let newState = setNumbersForGame(6, 10, state);
+    newState = checkNumsValid(newState);
+    expect(newState.isValid).toBe(false);
+    expect(newState.errorMessage).toBe(`Sorry, there are not enough cards in the pack for ${newState.numPlayers} players to have ${newState.numCards} cards each. Please try again.`);
+  });
+
   it('can generate a random number between 0 and 51', function () {
     let manyRandomNums = [];
     for (var i=0; i<500; i++) {
@@ -17,6 +24,12 @@ describe("Tests that poker game", function() {
     });
   });
 
+  it('can pick a card from the deck using a randomly generated number, and record the card', function () {
+    let newState = getRandomCard(state);
+    expect((newState.dealt).length).toBeGreaterThan(0);
+    expect((newState.card).length).toBe(2);
+  });
+
   it('can update the card deck, removing the card that has just been dealt', function () {
     let lenStateDeck = (state.deck).length;
     let newState = getRandomNum(state);
@@ -24,19 +37,6 @@ describe("Tests that poker game", function() {
     let lenUpdatedStateDeck = (newState.deck).length;
     expect(lenStateDeck).toBeGreaterThan(lenUpdatedStateDeck);
   })
-
-  it('can pick a random card from the deck and assign it to a value in the state object', function () {
-    let newState = getRandomCard(state);
-    expect((newState.dealt).length).toBeGreaterThan(0);
-    expect((newState.card).length).toBe(2);
-  });
-
-  it('can handle instances where there are too many players or cards for the size of the deck', function () {
-    let newState = setNumbersForGame(6, 10, state);
-    newState = checkNumsValid(newState);
-    expect(newState.isValid).toBe(false);
-    expect(newState.errorMessage).toBe('Sorry, there are not enough cards in the pack for ' + newState.numPlayers + ' players to have ' + newState.numCards + ' cards each. Please try again.');
-  });
 
   it('can deal out the right number of cards for the players', function () {
     let newState = setNumbersForGame(3, 8, state);
@@ -85,4 +85,9 @@ describe("Tests that poker game", function() {
     newState = getWinner(newState);
     expect(newState.winner).toBe('player3');
   });
-})
+
+  it('can play a full game, taking inputs and notifying outcome', function () {
+    let winnerStatement = playGame(3, 5, state);
+    expect(typeof winnerStatement).toBe('string');
+  });
+});

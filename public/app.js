@@ -26,7 +26,7 @@ let checkNumsValid = function (state) {
   let newState = Object.assign({}, state);
   if (newState.numPlayers * newState.numCards > 52) {
     newState.isValid = false;
-    newState.errorMessage = 'Sorry, there are not enough cards in the pack for ' + newState.numPlayers + ' players to have ' + newState.numCards + ' cards each. Please try again.'
+    newState.errorMessage = `Sorry, there are not enough cards in the pack for ${newState.numPlayers} players to have ${newState.numCards} cards each. Please try again.`
   }
   return newState;
 }
@@ -119,4 +119,18 @@ let getWinner = function (state) {
     }
   });
   return newState;
+}
+
+let playGame = function (numPlayers, numCards, state) {
+  let newState = Object.assign({}, state);
+  newState = setNumbersForGame(numPlayers, numCards, newState);
+  newState = checkNumsValid(newState);
+  if (newState.isValid === true) {
+    newState = dealHands(newState);
+    newState = getAllScores(newState);
+    newState = getWinner(newState);
+    return `The winner is ${newState.winner}`;
+  } else {
+    return newState.errorMessage;
+  }
 }
