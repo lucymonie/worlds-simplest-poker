@@ -26,7 +26,13 @@ let checkNumsValid = function (state) {
   let newState = Object.assign({}, state);
   if (newState.numPlayers * newState.numCards > 52) {
     newState.isValid = false;
-    newState.errorMessage = `Sorry, there are not enough cards in the pack for ${newState.numPlayers} players to have ${newState.numCards} cards each. Please try again.`
+    newState.errorMessage = `Sorry, there are not enough cards in the pack for ${newState.numPlayers} players to have ${newState.numCards} cards each. Please try again.`;
+  } else if (newState.numPlayers < 2) {
+    newState.isValid = false;
+    newState.errorMessage = `The minimum number of player is two - otherwise it's a hollow victory! Please try again.`;
+  } else if (newState.numCards < 1) {
+    newState.isValid = false;
+    newState.errorMessage = `In order to play, each player must have at least one card. Please try again.`;
   }
   return newState;
 }

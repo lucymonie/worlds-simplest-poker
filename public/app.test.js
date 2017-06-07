@@ -12,6 +12,20 @@ describe("Tests that poker game", function() {
     expect(newState.errorMessage).toBe(`Sorry, there are not enough cards in the pack for ${newState.numPlayers} players to have ${newState.numCards} cards each. Please try again.`);
   });
 
+  it('can handle instances where there are too few players', function () {
+    let newState = setNumbersForGame(1, 10, state);
+    newState = checkNumsValid(newState);
+    expect(newState.isValid).toBe(false);
+    expect(newState.errorMessage).toBe(`The minimum number of player is two - otherwise it's a hollow victory! Please try again.`);
+  });
+
+  it('can handle instances where zero cards is selected as an option', function () {
+    let newState = setNumbersForGame(20, 0, state);
+    newState = checkNumsValid(newState);
+    expect(newState.isValid).toBe(false);
+    expect(newState.errorMessage).toBe(`In order to play, each player must have at least one card. Please try again.`);
+  });
+
   it('can generate a random number between 0 and 51', function () {
     let manyRandomNums = [];
     for (var i=0; i<500; i++) {
