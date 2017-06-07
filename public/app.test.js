@@ -100,6 +100,16 @@ describe("Tests that poker game", function() {
     expect(newState.winner).toBe('player3');
   });
 
+  it('can construct a sentence fragment to list the winners', function () {
+    let newState = setNumbersForGame(3, 5, state);
+    newState.winners = ['player1', 'player2'];
+    let phrase = getPhrase(newState.winners);
+    expect(phrase).toBe('player1 and player2');
+    newState.winners = ['Fred', 'Betty', 'Gracie'];
+    phrase = getPhrase(newState.winners);
+    expect(phrase).toBe('Fred, Betty, and Gracie');
+  });
+
   it('can play a full game, taking inputs and notifying outcome', function () {
     let winnerStatement = playGame(3, 5, state);
     expect(typeof winnerStatement).toBe('string');

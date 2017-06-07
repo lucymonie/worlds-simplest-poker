@@ -12,7 +12,10 @@ let state = {
   allHands: null,
   allPoints: {},
   isValid: true,
-  playerList: null
+  playerList: null,
+  winner: '',
+  winners: [],
+  draw: null
 }
 
 let setNumbersForGame = function (numPlayers, numCards, state) {
@@ -119,9 +122,15 @@ let getWinner = function (state) {
   let newState = Object.assign({}, state);
   let winningScore = 0;
   newState.playerList.map(function (player) {
+    console.log('newState.allPoints[player] is: ', newState.allPoints[player]);
     if (newState.allPoints[player] > winningScore) {
       winningScore = newState.allPoints[player];
       newState.winner = player;
+      newState.draw = false;
+    } else if (newState.allPoints[player] === winningScore && newState.winner !== '') {
+      newState.draw = true;
+      newState.winners.push(newState.winner, player);
+      newState.winner = '';
     }
   });
   return newState;
@@ -135,8 +144,26 @@ let playGame = function (numPlayers, numCards, state) {
     newState = dealHands(newState);
     newState = getAllScores(newState);
     newState = getWinner(newState);
-    return `The winner is ${newState.winner}`;
+    if (newState.draw === false) {
+      return `The winner is ${newState.winner}`;
+    } else if (newState.draw === true) {
+      let phrase = getPhrase(newState.winners);
+      return `It\'s a draw! ${phrase} were the winners`;
+    }
   } else {
     return newState.errorMessage;
   }
+}
+
+let getPhrase = function (winners) {
+  let fragment = '';
+  if (winners.length === 2) {
+    fragment += `${winners[0]} and ${winners[1]}`;
+  } else {
+    for (let i = 0; i < winners.length-1; i++) {
+      fragment += winners[i] + ', ';
+    }
+    fragment += 'and ' + winners.pop();
+  }
+  return fragment;
 }
