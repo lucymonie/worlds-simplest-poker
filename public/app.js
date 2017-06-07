@@ -1,18 +1,3 @@
-let startPlay = document.querySelector('.submitButton');
-let playersForGame = document.querySelector('.players');
-let cardsForGame = document.querySelector('.cards');
-let winnerOfGame = document.querySelector('.winner');
-
-startPlay.addEventListener('click', takeInNumbers);
-
-function takeInNumbers () {
-  let players = playersForGame.value;
-  let cards = cardsForGame.value;
-  let newState = getState();
-  let winner = playGame(players, cards, newState);
-  winnerOfGame.innerText = winner;
-}
-
 let getState = function () {
   return state = {
     deck: [
@@ -159,14 +144,13 @@ let playGame = function (numPlayers, numCards, state) {
     newState = getAllScores(newState);
     newState = getWinner(newState);
     if (newState.draw === false) {
-      return `The winner is ${newState.winner}`;
+      newState.winnerStatement = `The winner is ${newState.winner}`;
     } else if (newState.draw === true) {
       let phrase = getPhrase(newState.winners);
-      return `It\'s a draw! ${phrase} were the winners`;
+      newState.winnerStatement = `It\'s a draw! ${phrase} were the winners`;
     }
-  } else {
-    return newState.errorMessage;
   }
+  return newState;
 }
 
 let getPhrase = function (winners) {

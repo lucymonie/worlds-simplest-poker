@@ -132,7 +132,7 @@ describe("Tests that poker game", function() {
 
   it('can play a full game, taking inputs and notifying outcome', function () {
     let newState = getState();
-    let winnerStatement = playGame(3, 5, newState);
-    expect(typeof winnerStatement).toBe('string');
+    newState = playGame(3, 5, newState);
+    expect(typeof newState.winnerStatement).toBe('string');
   });
 });
