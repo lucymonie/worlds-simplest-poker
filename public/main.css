@@ -1,10 +1,14 @@
 .card {
-  height: 100px;
-  width: 70px;
+  height: 130px;
+  width: 100px;
   border: 1px solid gray;
   border-radius: 5px;
-  margin-right: 5px;
+  margin-right: 10px;
   display: inline-block;
+  font-size: 38px;
+  flex-direction: column;
+  padding-left: 1rem;
+  padding-top: 2rem;
 }
 
 .winner {

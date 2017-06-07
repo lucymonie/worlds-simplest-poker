@@ -23,27 +23,27 @@ function displayCards (state) {
     state.allHands[player].map(function (card) {
       htmlString += '<div class="card">';
       if (card[0] === "X") {
-        htmlString += '10 ';
+        htmlString += '10';
       } else if (card[0] === 'J') {
-        htmlString += 'Jack ';
+        htmlString += 'Jack';
       } else if (card[0] === 'Q') {
-        htmlString += 'Queen ';
+        htmlString += 'Queen';
       } else if (card[0] === 'K') {
-        htmlString += 'King ';
+        htmlString += 'King';
       } else if (card[0] === 'A') {
-        htmlString += 'Ace ';
+        htmlString += 'Ace';
       } else {
         let n = Math.abs(card[0]);
         htmlString += `${n} `;
       }
       if (card[1] === 'H') {
-        htmlString += '<i class="fa fa-heart" aria-hidden="true"></i>';
+        htmlString += '<br><i class="fa fa-heart 6x" aria-hidden="true"></i>';
       } else if (card[1] === 'C') {
-        htmlString += '<i class="fa fa-rocket" aria-hidden="true"></i>';
+        htmlString += '<i class="fa fa-cog 6x" aria-hidden="true"></i>';
       } else if (card[1] === 'D') {
-        htmlString += '<i class="fa fa-glass" aria-hidden="true"></i>';
+        htmlString += '<br><i class="fa fa-diamond 6x" aria-hidden="true"></i>';
       } else if (card[1] === 'S') {
-        htmlString += '<i class="fa fa-shield" aria-hidden="true"></i>';
+        htmlString += '<br><i class="fa fa-shield 6x" aria-hidden="true"></i>';
       }
       htmlString += '</div>';
     });
