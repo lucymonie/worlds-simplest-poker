@@ -1,3 +1,18 @@
+let startPlay = document.querySelector('.submitButton');
+let playersForGame = document.querySelector('.players');
+let cardsForGame = document.querySelector('.cards');
+let winnerOfGame = document.querySelector('.winner');
+
+startPlay.addEventListener('click', takeInNumbers);
+
+function takeInNumbers () {
+  let players = playersForGame.value;
+  let cards = cardsForGame.value;
+  let newState = getState();
+  let winner = playGame(players, cards, newState);
+  winnerOfGame.innerText = winner;
+}
+
 let getState = function () {
   return state = {
     deck: [
