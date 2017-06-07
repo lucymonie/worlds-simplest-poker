@@ -5,7 +5,6 @@ let state = {
       '2C', '3C', '4C', '5C', '6C', '7C', '8C', '9C', 'XC', 'JC', 'QC', 'KC', 'AC',
       '2S', '3S', '4S', '5S', '6S', '7S', '8S', '9S', 'XS', 'JS', 'QS', 'KS', 'AS',
     ],
-  dealt: [],
   card: '',
   numPlayers: null,
   numCards: null,
@@ -25,8 +24,8 @@ let setNumbersForGame = function (numPlayers, numCards, state) {
   return newState;
 }
 
-let checkNumsValid = function (state) {
-  let newState = Object.assign({}, state);
+let checkNumsValid = function (stateObj) {
+  let newState = Object.assign({}, stateObj);
   if (newState.numPlayers * newState.numCards > 52) {
     newState.isValid = false;
     newState.errorMessage = `Sorry, there are not enough cards in the pack for ${newState.numPlayers} players to have ${newState.numCards} cards each. Please try again.`;
@@ -40,12 +39,12 @@ let checkNumsValid = function (state) {
   return newState;
 }
 
-let dealHands = function (state) {
-  let newState = Object.assign({}, state);
+let dealHands = function (stateObj) {
+  let newState = Object.assign({}, stateObj);
   let allHands = {};
-  for (var i = 0; i < state.numPlayers; i++) {
+  for (var i = 0; i < newState.numPlayers; i++) {
     allHands['player'+i] = [];
-    for (var j = 0; j < state.numCards; j++) {
+    for (var j = 0; j < newState.numCards; j++) {
       newState = getRandomCard(newState);
       allHands['player'+i].push(newState.card);
     }
@@ -54,17 +53,16 @@ let dealHands = function (state) {
   return newState;
 }
 
-let getRandomCard = function (state) {
-  let newState = Object.assign({}, state);
+let getRandomCard = function (stateObj) {
+  let newState = Object.assign({}, stateObj);
   newState = getRandomNum(newState);
   newState.card = newState.deck[newState.randomNum];
-  (newState.dealt).push(newState.card);
   newState = updateDeck(newState);
   return newState;
 }
 
-let getRandomNum = function (state) {
-  let newState = Object.assign({}, state);
+let getRandomNum = function (stateObj) {
+  let newState = Object.assign({}, stateObj);
   let min = 0;
   let max = (newState.deck).length -1;
   let n = Math.floor(Math.random() * (max - min + 1)) + min;
@@ -72,8 +70,8 @@ let getRandomNum = function (state) {
   return newState;
 }
 
-let updateDeck = function (state) {
-  let newState = Object.assign({}, state);
+let updateDeck = function (stateObj) {
+  let newState = Object.assign({}, stateObj);
   newState.deck = newState.deck.reduce(function (newDeck, card, ind) {
     if (ind !== newState.randomNum) {
       newDeck.push(card);
@@ -102,14 +100,14 @@ let getPoints = function (hand) {
   }, 0);
 }
 
-let getListOfPlayers = function (state) {
-  let newState = Object.assign({}, state);
-  newState.playerList = Object.keys(state.allHands);
+let getListOfPlayers = function (stateObj) {
+  let newState = Object.assign({}, stateObj);
+  newState.playerList = Object.keys(newState.allHands);
   return newState;
 }
 
-let getAllScores = function (state) {
-  let newState = Object.assign({}, state);
+let getAllScores = function (stateObj) {
+  let newState = Object.assign({}, stateObj);
   newState = getListOfPlayers(newState);
   newState.playerList.map(function (player) {
     let score = getPoints(newState.allHands[player]);
@@ -118,11 +116,10 @@ let getAllScores = function (state) {
   return newState;
 }
 
-let getWinner = function (state) {
-  let newState = Object.assign({}, state);
+let getWinner = function (stateObj) {
+  let newState = Object.assign({}, stateObj);
   let winningScore = 0;
   newState.playerList.map(function (player) {
-    console.log('newState.allPoints[player] is: ', newState.allPoints[player]);
     if (newState.allPoints[player] > winningScore) {
       winningScore = newState.allPoints[player];
       newState.winner = player;
@@ -136,8 +133,8 @@ let getWinner = function (state) {
   return newState;
 }
 
-let playGame = function (numPlayers, numCards, state) {
-  let newState = Object.assign({}, state);
+let playGame = function (numPlayers, numCards, stateObj) {
+  let newState = Object.assign({}, stateObj);
   newState = setNumbersForGame(numPlayers, numCards, newState);
   newState = checkNumsValid(newState);
   if (newState.isValid === true) {
