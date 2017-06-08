@@ -9,8 +9,7 @@ startPlay.addEventListener('click', takeInNumbers);
 function takeInNumbers () {
   let players = playersForGame.value;
   let cards = cardsForGame.value;
-  let newState = getState();
-  newState = playGame(players, cards, newState);
+  let newState = playGame(players, cards);
   if (newState.errorMessage) {
     winnerOfGame.innerText = newState.errorMessage
   } else {
