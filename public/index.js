@@ -11,12 +11,15 @@ function takeInNumbers () {
   let cards = cardsForGame.value;
   let newState = getState();
   newState = playGame(players, cards, newState);
-  displayCards(newState);
-  winnerOfGame.innerText = newState.winnerStatement;
+  if (newState.errorMessage) {
+    winnerOfGame.innerText = newState.errorMessage
+  } else {
+    displayCards(newState);
+    winnerOfGame.innerText = newState.winnerStatement;
+  }
 }
 
 function displayCards (state) {
-  console.log(state);
   let htmlBlob = '';
   (state.playerList).map(function (player) {
     let htmlString = '<p>' + player + '\'s hand</p>';
