@@ -8,7 +8,7 @@ Clone this repository:
 - SSH: `git@github.com:lucymonie/worlds-simplest-poker.git`
 - HTTPS: `https://github.com/lucymonie/worlds-simplest-poker.git`
 
-To play the local version, open index.html in your browser.
+To play the local version, open `index.html` in your browser.
 
 #### To run the tests
 - Download Jasmine 2.5.1: https://github.com/jasmine/jasmine/releases/tag/v2.5.1
@@ -16,13 +16,14 @@ To play the local version, open index.html in your browser.
 - Open `test` folder, and open `SpecRunner.html` in the browser
 
 ### Notes
-This is a simple game based on Poker.
+This is a simple game based on Poker, in which players are dealt a single hand of cards, and
+the player with the highest scoring cards is declared the winner.
 
 #### Random selection or shuffle?
 This application deals a fixed number of cards to each player based on randomised
 selection from a deck of 52 cards. The instructions specifically mentioned shuffling the
 cards and then dealing them, but as there is no requirement to show the cards being shuffled,
-I decided to use random selection as the result is the same, and it's faster.
+I decided to use random selection. The result is the same, and it's faster.
 
 I read about shuffling alogrithms and there's a great post about it here:
 https://bost.ocks.org/mike/shuffle/
