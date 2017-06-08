@@ -44,5 +44,6 @@ of cards) and renders representations of the cards in each players hand to the s
 comment about which player has won.
 
 #### Scope creep
-When I added the user interface, it seemed ridiculous to take inputs from a browser window and display nothing about the game. However, when I added the card view, it struck me that this made it possible to see if you had a pair or three or
-three-of-a-kind in your hand... each time I add a feature, the need for another feature arises!
+I decided to add a user interface just for fun, but then it seemed ridiculous to take inputs from a browser window and display nothing about the game other than a statement about who won. However, when I added the card view, it struck me that this made it possible to see if you had a pair or three or three-of-a-kind in your hand...
+
+Basically, each time I add a feature, the need for another feature arises!
