@@ -1,3 +1,22 @@
+.interface {
+  padding: 2rem 0 2rem 4rem;
+  background-color: #1A1B41;
+  width: 250px;
+  border-radius: 5px;
+  color: white;
+}
+
+.submitButton {
+  background:none;
+  background-color: #3C4F76;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  width: 5rem;
+  height: 1.5rem;
+}
+
 .card {
   height: 130px;
   width: 100px;
@@ -12,5 +31,5 @@
 
 .winner {
   font-size: 20px;
-  color: blue;
+  color: #3C4F76;
 }
