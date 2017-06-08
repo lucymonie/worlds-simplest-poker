@@ -4,9 +4,8 @@
   border: 1px solid gray;
   border-radius: 5px;
   margin-right: 10px;
-  display: inline-block;
+  display:inline-table;
   font-size: 38px;
-  flex-direction: column;
   padding-left: 1rem;
   padding-top: 2rem;
 }
